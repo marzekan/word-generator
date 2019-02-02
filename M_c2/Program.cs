@@ -145,12 +145,6 @@ namespace M_c2
             }
         }
 
-        private static bool Is_Eng_Word(string filePath, string novaRijec)
-        {
-            // Ubacit kod iz TextMisc, klasa DataCleansner.
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Generates new letter.
         /// </summary>
@@ -227,13 +221,6 @@ namespace M_c2
                 }
             }
         }
-
-        // Adds new word to seed_file
-        private static void Add_To_Seed()
-        {
-            throw new NotImplementedException();
-        }
-        
         
         /*\
          *  dat korisniku da odabere file *u file loaderu* nek se otvori w-forma jbg
