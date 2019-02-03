@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.PathTxtbox = new System.Windows.Forms.TextBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.BrowseBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.IterTxtbox = new System.Windows.Forms.TextBox();
+            this.TimeTxtbox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -49,15 +49,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Enter path of .txt file you want to generate words from.";
             // 
-            // textBox1
+            // PathTxtbox
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(15, 32);
-            this.textBox1.Name = "textBox1";
-            this.helpProvider1.SetShowHelp(this.textBox1, true);
-            this.textBox1.Size = new System.Drawing.Size(482, 22);
-            this.textBox1.TabIndex = 1;
+            this.PathTxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PathTxtbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PathTxtbox.Location = new System.Drawing.Point(15, 32);
+            this.PathTxtbox.Name = "PathTxtbox";
+            this.helpProvider1.SetShowHelp(this.PathTxtbox, true);
+            this.PathTxtbox.Size = new System.Drawing.Size(482, 22);
+            this.PathTxtbox.TabIndex = 1;
             // 
             // helpProvider1
             // 
@@ -67,7 +67,7 @@
             // 
             this.BrowseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BrowseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseBtn.Location = new System.Drawing.Point(500, 29);
+            this.BrowseBtn.Location = new System.Drawing.Point(499, 32);
             this.BrowseBtn.Name = "BrowseBtn";
             this.BrowseBtn.Size = new System.Drawing.Size(82, 34);
             this.BrowseBtn.TabIndex = 2;
@@ -85,23 +85,23 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Number of words to generate:";
             // 
-            // textBox2
+            // IterTxtbox
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(15, 87);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(197, 22);
-            this.textBox2.TabIndex = 4;
+            this.IterTxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.IterTxtbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IterTxtbox.Location = new System.Drawing.Point(15, 87);
+            this.IterTxtbox.Name = "IterTxtbox";
+            this.IterTxtbox.Size = new System.Drawing.Size(197, 22);
+            this.IterTxtbox.TabIndex = 4;
             // 
-            // textBox3
+            // TimeTxtbox
             // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(15, 146);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(290, 22);
-            this.textBox3.TabIndex = 6;
+            this.TimeTxtbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TimeTxtbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimeTxtbox.Location = new System.Drawing.Point(15, 146);
+            this.TimeTxtbox.Name = "TimeTxtbox";
+            this.TimeTxtbox.Size = new System.Drawing.Size(290, 22);
+            this.TimeTxtbox.TabIndex = 6;
             // 
             // label3
             // 
@@ -124,6 +124,7 @@
             this.SaveBtn.TabIndex = 8;
             this.SaveBtn.Text = "Save";
             this.SaveBtn.UseVisualStyleBackColor = false;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // SettingsForm
             // 
@@ -131,12 +132,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(593, 263);
             this.Controls.Add(this.SaveBtn);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.TimeTxtbox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.IterTxtbox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BrowseBtn);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.PathTxtbox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "SettingsForm";
@@ -149,12 +150,12 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox PathTxtbox;
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.Button BrowseBtn;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox IterTxtbox;
+        private System.Windows.Forms.TextBox TimeTxtbox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button SaveBtn;
     }
