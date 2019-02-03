@@ -12,12 +12,14 @@ namespace M_c2
     /// </summary>
     public struct Paths{
 
-        public static string WG_path = Directory.GetParent(Directory.GetParent(Directory.GetParent(
+        public static readonly string WG_path = Directory.GetParent(Directory.GetParent(Directory.GetParent(
                                  Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)).ToString()).ToString()).ToString();
 
-        public static string fileInfo_path = WG_path + @"\files\files-info\";
+        public static readonly string files_path = WG_path + @"\files\";
 
-        public static string newWords_path = WG_path + @"\files\new_words\";
+        public static readonly string fileInfo_path = files_path + @"files-info\";
+
+        public static readonly string newWords_path = files_path + @"new_words\";
     }
 
     /// <summary>
@@ -179,7 +181,7 @@ namespace M_c2
             List<int> letterList = Get_LetterLines(filepath);
 
 
-            File.Create(Paths.fileInfo_path + filename + "-ll.txt");
+            File.Create(Paths.fileInfo_path + filename + "-ll.txt").Dispose();
 
 
             using (TextWriter tw = new StreamWriter(Paths.fileInfo_path + filename + "-ll.txt"))

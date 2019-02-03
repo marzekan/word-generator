@@ -15,7 +15,6 @@ namespace M_c2
     class Program
     {
         private static int FIRST_LETTER_ROW = 27;
-        private static int END_LETTER_COLUMN = 26;
 
         private static List<char> lettersList = new List<char> { 'a','b','c','d','e','f','g','h','i',
             'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
@@ -39,11 +38,11 @@ namespace M_c2
         /// Fills the word matrix with letters.
         /// </summary>
         /// <param name="fileName"></param>
-        private static void Read_SeedFile(string fileName)
+        private static void Read_SeedFile(string filepath)
         {
-            StreamReader seedFile = new StreamReader(@"E:\Projects\C# repos\Word Generator\files\" + fileName);
+            StreamReader seedFile = new StreamReader(filepath);
 
-            int MAX_LINES = File.ReadLines(@"E:\Projects\C# repos\Word Generator\files\" + fileName).Count();
+            int MAX_LINES = File.ReadLines(filepath).Count();
 
             Stanje stanje = Stanje.START_LETTER_STATE;
 
@@ -221,7 +220,7 @@ namespace M_c2
                 }
             }
         }
-        
+
         /*\
          *  dat korisniku da odabere file *u file loaderu* nek se otvori w-forma jbg
          *  ili run default file
@@ -236,68 +235,116 @@ namespace M_c2
          *  
          *  statistike trazenja, vrijeme, genenrirane rijeci, prosjecno vrijeme generiranja rijeci
         \*/
-
         
         static void Main(string[] args)
         {
             Console.Title = "Word Generator";
+            Console.SetWindowSize(100, 60);
+
             OpenFileDialog pathFinder;
             Thread thread;
 
-            string fileName = "ENGall";
-            string iter = "1000";
+            string search_path_choice = "";
+            string words_path_choice = "";
+            string iter_choice = "";
+            int sleep_choice = 0;
 
-            /*Console.WriteLine("File name: ");
-            string fileName = Console.ReadLine();
+            #region Default values
 
-            Console.WriteLine("Number of words: ");
-            string iter = Console.ReadLine();*/
+            string default_search_path = Paths.files_path + @"1000.txt";
+            string default_word_path = Paths.files_path + @"1000.txt";
+            int sleep = 300;
+            string default_iter = "1000";
 
-            /*
-             *  
-             */
+            #endregion
 
-            Console.WriteLine("Choose your own file? (y/n)");
-            ConsoleKeyInfo yn = Console.ReadKey();
-            
-            if (yn.Key == ConsoleKey.Y)
+            ConsoleKeyInfo yn;
+
+            do
             {
-                pathFinder = new OpenFileDialog();
-                thread = new Thread(new ParameterizedThreadStart(param => { pathFinder.ShowDialog(); }));
-                thread.SetApartmentState(ApartmentState.STA);
-                thread.Start();
-            }
+                Console.Clear();
+
+                Console.Write("Use default settings? (y/n): ");
+                yn = Console.ReadKey();
+
+                if (yn.Key == ConsoleKey.Y)
+                {
+                    search_path_choice = default_search_path;
+                    words_path_choice = default_word_path;
+                    iter_choice = default_iter;
+                }
+                else if (yn.Key == ConsoleKey.N)
+                {
+                    // Otvorit neki "options" meni ili win formu ili??
+
+                    SettingsForm f = new SettingsForm();
+                    f.ShowDialog();
+
+                    Console.WriteLine("\n----------------SETTINGS----------------");
+                    Console.Write("Insert path of .txt file you want to generate words from: ");
+                    words_path_choice = Console.ReadLine();
+                    Console.Write("Insert the number of words to generate: ");
+                    iter_choice = Console.ReadLine();
+                    search_path_choice = default_search_path;
+                    Console.WriteLine("------------------------------------------\n");
+                }
+                else
+                {
+                    Console.WriteLine("\nPlease only input keys 'y' or 'n'. Press enter to continue.");
+                    Console.ReadLine();
+                }
+
+            } while (yn.Key != ConsoleKey.Y && yn.Key != ConsoleKey.N);
+
+
+            /*pathFinder = new OpenFileDialog();
+            thread = new Thread(new ParameterizedThreadStart(param => { pathFinder.ShowDialog(); }));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();*/
 
             try
             {
-                Read_SeedFile(fileName + ".txt");
+                Read_SeedFile(words_path_choice);
             }
             catch (Exception ex)
             {
+                string fileName = Path.GetFileName(words_path_choice);
                 Console.WriteLine("File by the name " + fileName + " was not found.", ex);
+                Console.WriteLine("Check if the file path is correct.");
+                Console.ReadLine();
                 return;
             }
 
-
-
-            Console.WriteLine("Matrix of english words...");
+            Console.WriteLine("\nPlease wait...\n");
+            Console.WriteLine("Word matrix: ");
             Console.WriteLine();
             PrintMatrix();
 
+            Searcher search = new Searcher(search_path_choice);
+            FileManager fm = new FileManager();
 
-
-            for (int i = 0; i < int.Parse(iter); i++)
+            for (int i = 0; i < int.Parse(iter_choice); i++)
             {
-                Console.WriteLine(Generate_Word());
+                search.Word = Generate_Word();
+                bool is_eng = search.Is_English_Word();
+                Console.Write(search.Word);
+
+                if (is_eng)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("{0,20}"," IS ENGLISH");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("{0,20}"," NOT ENGLISH");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+
                 Console.WriteLine();
-                Thread.Sleep(400);
+                Thread.Sleep(sleep);
             }
-
-            // Provjeriti je li novo-generirana rijec iz engleskog.
-            // Ako je, onda ju bacit nazad na analizu u "Read_SeedFile".
-            // Ako nije, zapisat ju u novi .txt file sa svim KRIVIM rijecima.
-
-            // Ubacit mjerenje vremena izvodenja - analize n shit
 
             Console.WriteLine(" ~ FIN ~ ");
             Console.ReadLine();
@@ -315,4 +362,5 @@ namespace M_c2
             }
         }
     }
+
 }

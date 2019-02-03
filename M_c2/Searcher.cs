@@ -34,7 +34,7 @@ namespace M_c2
             startLinesList = new List<int>();
 
             string filename = System.IO.Path.GetFileName(Path);
-            string letterFile_path = Paths.fileInfo_path + @"\" + filename + "-ll.txt";
+            string letterFile_path = Paths.fileInfo_path + @"" + filename + "-ll.txt";
 
             if (!File.Exists(letterFile_path))
             {
@@ -46,7 +46,7 @@ namespace M_c2
             {
                 for (int i = 0; i < File.ReadLines(letterFile_path).Count(); i++)
                 {
-                    startLinesList[i] = int.Parse(sr.ReadLine());
+                    startLinesList.Add(int.Parse(sr.ReadLine()));
                 }
             }
 
