@@ -1,4 +1,0 @@
-E:\Projects\C# repos\Word Generator\files\1000.txt
-E:\Projects\C# repos\Word Generator\files\1000.txt
-1000
-300

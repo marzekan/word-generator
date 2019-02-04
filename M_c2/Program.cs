@@ -35,17 +35,15 @@ namespace M_c2
 
             Console.WriteLine("Press any key to continue.");
             Console.ReadLine();
-
-            FileManager f = new FileManager(DateTime.Now);
-            f.Save_choices(Search_path_choice, Words_path_choice, Iter_choice, Sleep_choice);
         }
 
-        private static void Generate()
+        // JUSTIN CASE
+        /*private void Generate()
         {
-            Searcher search = new Searcher(Search_path_choice);
+            Searcher search = new Searcher(Search_path);
             FileManager fm = new FileManager();
 
-            for (int i = 0; i < int.Parse(Iter_choice); i++)
+            for (int i = 0; i < Iterator; i++)
             {
                 search.Word = Algorythm.Generate_Word();
                 bool is_eng = search.Is_English_Word();
@@ -65,9 +63,9 @@ namespace M_c2
                 }
 
                 Console.WriteLine();
-                Thread.Sleep(Sleep_choice);
+                Thread.Sleep(Sleep);
             }
-        }
+        }*/
 
         static void Main(string[] args)
         {
@@ -139,9 +137,8 @@ namespace M_c2
 
             if (choice.Key == ConsoleKey.Y)
             {
-                GeneratorForm gf = new GeneratorForm();
+                GeneratorForm gf = new GeneratorForm(Search_path_choice, int.Parse(Iter_choice), Sleep_choice);
                 gf.ShowDialog();
-                Generate();
             }
             else
             {
@@ -174,8 +171,9 @@ namespace M_c2
                 Console.WriteLine("\nEnglish words generated: " + correct_words + "/" + Iter_choice);
             }
 
-            Console.WriteLine("\n ~ FIN ~ ");
+            Console.WriteLine("\n ~ FIN ~ \nPress any key to exit.");
             Console.ReadLine();
+            Environment.Exit(0);
         }
     }
 
