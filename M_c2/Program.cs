@@ -165,7 +165,7 @@ namespace M_c2
                 }
             }
 
-            Console.WriteLine("\n\n ~ FIN ~ \nPress any key to exit.");
+            Console.WriteLine("\n\n ~ FIN ~ \n\nPress any key to exit.");
             Console.ReadLine();
             Environment.Exit(0);
         }

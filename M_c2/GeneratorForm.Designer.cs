@@ -53,7 +53,7 @@
             // 
             this.PauseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PauseBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.PauseBtn.Location = new System.Drawing.Point(8, 335);
+            this.PauseBtn.Location = new System.Drawing.Point(12, 330);
             this.PauseBtn.Name = "PauseBtn";
             this.PauseBtn.Size = new System.Drawing.Size(81, 35);
             this.PauseBtn.TabIndex = 1;
@@ -66,7 +66,7 @@
             this.SaveBtn.Enabled = false;
             this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SaveBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.SaveBtn.Location = new System.Drawing.Point(518, 335);
+            this.SaveBtn.Location = new System.Drawing.Point(518, 330);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(81, 35);
             this.SaveBtn.TabIndex = 2;

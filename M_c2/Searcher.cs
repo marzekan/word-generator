@@ -120,7 +120,7 @@ namespace M_c2
             }
             else
             {
-                return 20;
+                return 12;
             }
 
         }
@@ -171,6 +171,7 @@ namespace M_c2
         {
             // Token source through which the cancellation signal will be sent.
             CancellationTokenSource tokensource = new CancellationTokenSource();
+            wordFound = false;
 
             int task_Number = Tasks();
             int word_Number = Words();
