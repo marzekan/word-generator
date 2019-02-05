@@ -20,7 +20,7 @@ namespace M_c2
 
         #region Default values
 
-        private static string default_search_path = Paths.files_path + @"1000.txt";
+        private static string default_search_path = Paths.files_path + @"ENGall.txt";
         private static string default_word_path = Paths.files_path + @"1000.txt";
         private static int default_sleep = 300;
         private static string default_iter = "1000";
@@ -37,35 +37,16 @@ namespace M_c2
             Console.ReadLine();
         }
 
-        // JUSTIN CASE
-        /*private void Generate()
+        public static void SaveToFile()
         {
-            Searcher search = new Searcher(Search_path);
-            FileManager fm = new FileManager();
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.ShowDialog();
 
-            for (int i = 0; i < Iterator; i++)
-            {
-                search.Word = Algorythm.Generate_Word();
-                bool is_eng = search.Is_English_Word();
-                Console.Write(search.Word);
+            string newPath = fileDialog.FileName;
+            string oldPath = Paths.GeneratedWords_path;
 
-                if (is_eng)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("{0,20}", " IS ENGLISH");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("{0,20}", " NOT ENGLISH");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                }
-
-                Console.WriteLine();
-                Thread.Sleep(Sleep);
-            }
-        }*/
+            File.Copy(oldPath, newPath + ".txt");
+        }
 
         static void Main(string[] args)
         {
@@ -144,19 +125,20 @@ namespace M_c2
             {
                 Searcher search = new Searcher(Search_path_choice);
                 FileManager fm = new FileManager();
+                List<string> generated_words = new List<string>();
 
-                Console.WriteLine("\nGenerating...\n");
+                fm.Delete_generated();
+
+                Console.WriteLine("\n\nGenerating words...\n");
 
                 for (int i = 0; i < int.Parse(Iter_choice); i++)
                 {
                     search.Word = Algorythm.Generate_Word();
                     bool is_eng = search.Is_English_Word();
 
-                    if (i % 500 == 0)
-                    {
-                        Console.WriteLine(i + "/" + Iter_choice + "...");
-                    }
-                    else if (i == int.Parse(Iter_choice) - 1)
+                    generated_words.Add(search.Word);
+
+                    if (i == int.Parse(Iter_choice) - 1)
                     {
                         Console.WriteLine(Iter_choice + "/" + Iter_choice);
                     }
@@ -168,10 +150,22 @@ namespace M_c2
                     }
                 }
 
+                fm.AddTo_GeneratedWords(generated_words);
+
                 Console.WriteLine("\nEnglish words generated: " + correct_words + "/" + Iter_choice);
+
+                Console.Write("\nWould you like to save the generated words? (y/n): ");
+                ConsoleKeyInfo yesno = Console.ReadKey();
+
+                if (yesno.Key == ConsoleKey.Y)
+                {
+                    Thread saveThread = new Thread(new ParameterizedThreadStart(p => { SaveToFile(); }));
+                    saveThread.SetApartmentState(ApartmentState.STA);
+                    saveThread.Start();
+                }
             }
 
-            Console.WriteLine("\n ~ FIN ~ \nPress any key to exit.");
+            Console.WriteLine("\n\n ~ FIN ~ \nPress any key to exit.");
             Console.ReadLine();
             Environment.Exit(0);
         }

@@ -44,7 +44,9 @@ namespace M_c2
 
             using (StreamReader sr = new StreamReader(letterFile_path))
             {
-                for (int i = 0; i < File.ReadLines(letterFile_path).Count(); i++)
+                int maxLine = File.ReadLines(letterFile_path).Count();
+
+                for (int i = 0; i < maxLine; i++)
                 {
                     startLinesList.Add(int.Parse(sr.ReadLine()));
                 }
@@ -147,9 +149,9 @@ namespace M_c2
                     return;
                 }
 
-                string linija = sReader.ReadLine();
+                string row = sReader.ReadLine();
 
-                if (linija.ToLower() == Word.ToLower())
+                if (row != null && row.ToLower() == Word.ToLower())
                 {
                     wordFound = true;
 

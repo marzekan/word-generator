@@ -20,6 +20,8 @@ namespace M_c2
         public static readonly string fileInfo_path = files_path + @"files-info\";
 
         public static readonly string temp_path = files_path + @"temp\";
+
+        public static readonly string GeneratedWords_path = temp_path + @"generated.txt";
     }
 
     /// <summary>
@@ -55,113 +57,118 @@ namespace M_c2
 
             StreamReader sr = new StreamReader(file_path);
 
-            for (int i = 0; i < File.ReadLines(file_path).Count(); i++)
+            int maxlines = File.ReadLines(file_path).Count();
+
+            for (int i = 0; i < maxlines; i++)
             {
                 string r = sr.ReadLine().ToLower();
 
-                if (r.First() == 'a' && firstLetterList[0] == 0)
+                if (!(r.Any(char.IsDigit) || r.Any(char.IsNumber) || r.Any(char.IsPunctuation) || r.Any(char.IsSeparator)))
                 {
-                    firstLetterList[0] = i;
-                }
-                else if (r.First() == 'b' && firstLetterList[1] == 0)
-                {
-                    firstLetterList[1] = i;
-                }
-                else if (r.First() == 'c' && firstLetterList[2] == 0)
-                {
-                    firstLetterList[2] = i;
-                }
-                else if (r.First() == 'd' && firstLetterList[3] == 0)
-                {
-                    firstLetterList[3] = i;
-                }
-                else if (r.First() == 'e' && firstLetterList[4] == 0)
-                {
-                    firstLetterList[4] = i;
-                }
-                else if (r.First() == 'f' && firstLetterList[5] == 0)
-                {
-                    firstLetterList[5] = i;
-                }
-                else if (r.First() == 'g' && firstLetterList[6] == 0)
-                {
-                    firstLetterList[6] = i;
-                }
-                else if (r.First() == 'h' && firstLetterList[7] == 0)
-                {
-                    firstLetterList[7] = i;
-                }
-                else if (r.First() == 'i' && firstLetterList[8] == 0)
-                {
-                    firstLetterList[8] = i;
-                }
-                else if (r.First() == 'j' && firstLetterList[9] == 0)
-                {
-                    firstLetterList[9] = i;
-                }
-                else if (r.First() == 'k' && firstLetterList[10] == 0)
-                {
-                    firstLetterList[10] = i;
-                }
-                else if (r.First() == 'l' && firstLetterList[11] == 0)
-                {
-                    firstLetterList[11] = i;
-                }
-                else if (r.First() == 'm' && firstLetterList[12] == 0)
-                {
-                    firstLetterList[12] = i;
-                }
-                else if (r.First() == 'n' && firstLetterList[13] == 0)
-                {
-                    firstLetterList[13] = i;
-                }
-                else if (r.First() == 'o' && firstLetterList[14] == 0)
-                {
-                    firstLetterList[14] = i;
-                }
-                else if (r.First() == 'p' && firstLetterList[15] == 0)
-                {
-                    firstLetterList[15] = i;
-                }
-                else if (r.First() == 'q' && firstLetterList[16] == 0)
-                {
-                    firstLetterList[16] = i;
-                }
-                else if (r.First() == 'r' && firstLetterList[17] == 0)
-                {
-                    firstLetterList[17] = i;
-                }
-                else if (r.First() == 's' && firstLetterList[18] == 0)
-                {
-                    firstLetterList[18] = i;
-                }
-                else if (r.First() == 't' && firstLetterList[19] == 0)
-                {
-                    firstLetterList[19] = i;
-                }
-                else if (r.First() == 'u' && firstLetterList[20] == 0)
-                {
-                    firstLetterList[20] = i;
-                }
-                else if (r.First() == 'v' && firstLetterList[21] == 0)
-                {
-                    firstLetterList[21] = i;
-                }
-                else if (r.First() == 'w' && firstLetterList[22] == 0)
-                {
-                    firstLetterList[22] = i;
-                }
-                else if (r.First() == 'x' && firstLetterList[23] == 0)
-                {
-                    firstLetterList[23] = i;
-                }
-                else if (r.First() == 'y' && firstLetterList[24] == 0)
-                {
-                    firstLetterList[24] = i;
-                }
-                else if (r.First() == 'z' && firstLetterList[25] == 0)
-                {
-                    firstLetterList[25] = i;
+                    if (r.First() == 'a' && firstLetterList[0] == 0)
+                    {
+                        firstLetterList[0] = i;
+                    }
+                    else if (r.First() == 'b' && firstLetterList[1] == 0)
+                    {
+                        firstLetterList[1] = i;
+                    }
+                    else if (r.First() == 'c' && firstLetterList[2] == 0)
+                    {
+                        firstLetterList[2] = i;
+                    }
+                    else if (r.First() == 'd' && firstLetterList[3] == 0)
+                    {
+                        firstLetterList[3] = i;
+                    }
+                    else if (r.First() == 'e' && firstLetterList[4] == 0)
+                    {
+                        firstLetterList[4] = i;
+                    }
+                    else if (r.First() == 'f' && firstLetterList[5] == 0)
+                    {
+                        firstLetterList[5] = i;
+                    }
+                    else if (r.First() == 'g' && firstLetterList[6] == 0)
+                    {
+                        firstLetterList[6] = i;
+                    }
+                    else if (r.First() == 'h' && firstLetterList[7] == 0)
+                    {
+                        firstLetterList[7] = i;
+                    }
+                    else if (r.First() == 'i' && firstLetterList[8] == 0)
+                    {
+                        firstLetterList[8] = i;
+                    }
+                    else if (r.First() == 'j' && firstLetterList[9] == 0)
+                    {
+                        firstLetterList[9] = i;
+                    }
+                    else if (r.First() == 'k' && firstLetterList[10] == 0)
+                    {
+                        firstLetterList[10] = i;
+                    }
+                    else if (r.First() == 'l' && firstLetterList[11] == 0)
+                    {
+                        firstLetterList[11] = i;
+                    }
+                    else if (r.First() == 'm' && firstLetterList[12] == 0)
+                    {
+                        firstLetterList[12] = i;
+                    }
+                    else if (r.First() == 'n' && firstLetterList[13] == 0)
+                    {
+                        firstLetterList[13] = i;
+                    }
+                    else if (r.First() == 'o' && firstLetterList[14] == 0)
+                    {
+                        firstLetterList[14] = i;
+                    }
+                    else if (r.First() == 'p' && firstLetterList[15] == 0)
+                    {
+                        firstLetterList[15] = i;
+                    }
+                    else if (r.First() == 'q' && firstLetterList[16] == 0)
+                    {
+                        firstLetterList[16] = i;
+                    }
+                    else if (r.First() == 'r' && firstLetterList[17] == 0)
+                    {
+                        firstLetterList[17] = i;
+                    }
+                    else if (r.First() == 's' && firstLetterList[18] == 0)
+                    {
+                        firstLetterList[18] = i;
+                    }
+                    else if (r.First() == 't' && firstLetterList[19] == 0)
+                    {
+                        firstLetterList[19] = i;
+                    }
+                    else if (r.First() == 'u' && firstLetterList[20] == 0)
+                    {
+                        firstLetterList[20] = i;
+                    }
+                    else if (r.First() == 'v' && firstLetterList[21] == 0)
+                    {
+                        firstLetterList[21] = i;
+                    }
+                    else if (r.First() == 'w' && firstLetterList[22] == 0)
+                    {
+                        firstLetterList[22] = i;
+                    }
+                    else if (r.First() == 'x' && firstLetterList[23] == 0)
+                    {
+                        firstLetterList[23] = i;
+                    }
+                    else if (r.First() == 'y' && firstLetterList[24] == 0)
+                    {
+                        firstLetterList[24] = i;
+                    }
+                    else if (r.First() == 'z' && firstLetterList[25] == 0)
+                    {
+                        firstLetterList[25] = i;
+                    }
                 }
             }
 
@@ -198,20 +205,25 @@ namespace M_c2
         /// Adds every new generated word to single text file.
         /// </summary>
         /// <param name="word"> Word generated by an algorithm.</param>
-        public void AddTo_GeneratedWords(string word)
+        public void AddTo_GeneratedWords(List<string> word_list)
         {
-            string generated_words_path = Paths.temp_path + @"\generated_" + Creation.ToString() + ".txt";
-
-            if (!File.Exists(generated_words_path))
+            if (!File.Exists(Paths.GeneratedWords_path))
             {
-                File.Create(generated_words_path);
-                File.SetCreationTime(generated_words_path, DateTime.Now);
+                File.Create(Paths.GeneratedWords_path).Dispose();
             }
 
-            using (TextWriter tw = new StreamWriter(generated_words_path))
+            using (TextWriter tw = new StreamWriter(Paths.GeneratedWords_path))
             {
-                tw.WriteLine(word);
+                for (int i = 0; i < word_list.Count; i++)
+                {
+                    tw.WriteLine(word_list[i]);
+                }
             }
+        }
+
+        public void Delete_generated()
+        {
+            File.Delete(Paths.GeneratedWords_path);
         }
 
         public void Save_choices(string search, string words, string iter, int sleep)
