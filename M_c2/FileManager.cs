@@ -223,7 +223,10 @@ namespace M_c2
 
         public void Delete_generated()
         {
-            File.Delete(Paths.GeneratedWords_path);
+            if (File.Exists(Paths.GeneratedWords_path))
+            {
+                File.Delete(Paths.GeneratedWords_path);
+            }
         }
 
         public void Save_choices(string search, string words, string iter, int sleep)
